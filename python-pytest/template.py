@@ -104,4 +104,4 @@ class ReactivePythonCharmTemplate(CharmTemplate):
         # rename lib.py to <charm-name>.py
         new_name = '%s.py' % config['metadata']['package'].replace('-', '_')
         os.rename(os.path.join(output_dir, 'src', 'lib', 'lib.py'),
-                  os.path.join(output_dir, 'src', 'lib', 'lib_' + new_name.lower()))
+                  os.path.join(output_dir, 'src', 'lib', 'lib_' + new_name))
