@@ -43,6 +43,7 @@ class ReactivePythonCharmTemplate(CharmTemplate):
     _TEMPLATE_URL = "https://github.com/chris-sanders/template-python-pytest"
 
     def create_charm(self, config, output_dir):
+        config['metadata']['package'] = config['metadata']['package'].lower()
         self._clone_template(config, output_dir)
 
         for root, dirs, files in os.walk(output_dir):
@@ -57,7 +58,7 @@ class ReactivePythonCharmTemplate(CharmTemplate):
             return
 
         # Add configurations to simplify the templates
-        config['libfile'] = 'lib_{}'.format(config['metadata']['package'].replace('-', '_'))
+        config['libfile'] = 'lib_{}'.format(config['metadata']['package'].replace('-', '_')).lower()
         config['libclass'] = '{}Helper'.format(config['metadata']['package'].replace('-', '').capitalize())
         config['fixture'] = config['metadata']['package'].replace('-', '').lower()
         mode = os.stat(outfile)[ST_MODE]
@@ -104,4 +105,4 @@ class ReactivePythonCharmTemplate(CharmTemplate):
         # rename lib.py to <charm-name>.py
         new_name = '%s.py' % config['metadata']['package'].replace('-', '_')
         os.rename(os.path.join(output_dir, 'src', 'lib', 'lib.py'),
-                  os.path.join(output_dir, 'src', 'lib', 'lib_' + new_name))
+                  os.path.join(output_dir, 'src', 'lib', 'lib_' + new_name.lower()))
