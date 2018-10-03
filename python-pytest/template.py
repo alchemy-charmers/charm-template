@@ -56,6 +56,10 @@ class ReactivePythonCharmTemplate(CharmTemplate):
         if path.islink(outfile):
             return
 
+        # Add configurations to simplify the templates
+        config['libfile'] = 'lib_{}'.format(config['metadata']['package'].replace('-', '_'))
+        config['libclass'] = '{}Helper'.format(config['metadata']['package'].replace('-', '').capitalize())
+        config['fixture'] = config['metadata']['package'].replace('-', '').lower()
         mode = os.stat(outfile)[ST_MODE]
         t = Template(file=outfile, searchList=(config))
         o = tempfile.NamedTemporaryFile(
@@ -100,4 +104,4 @@ class ReactivePythonCharmTemplate(CharmTemplate):
         # rename lib.py to <charm-name>.py
         new_name = '%s.py' % config['metadata']['package'].replace('-', '_')
         os.rename(os.path.join(output_dir, 'src', 'lib', 'lib.py'),
-                  os.path.join(output_dir, 'src', 'lib', 'lib' + new_name))
+                  os.path.join(output_dir, 'src', 'lib', 'lib_' + new_name.lower()))
