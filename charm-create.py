@@ -23,7 +23,10 @@ for root, dirs, files in os.walk(base_path):
 for template in templates:
     print("Added custom template: {}".format(template))
     template_path = os.path.join(base_path, template)
-    tplt = importlib.import_module(template)
+    try:
+        tplt = importlib.import_module(template)
+    except ImportError:
+        continue
     for name, obj in inspect.getmembers(tplt):
         if inspect.isclass(obj):
             class_name = name
