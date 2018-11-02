@@ -8,9 +8,13 @@ This is not currently available via a snap, because it was started for developme
 intended to be a long term solution. It requires charmtools as it's implemented
 as a monkeypatch on charmtools. 
 
-To install charmtools:
+To install charmtools as a snap:
 ```bash
 sudo snap install charm
+```
+Or in a virtual environment:
+```bash
+pip install charm-tools
 ```
 
 Clone this repository:

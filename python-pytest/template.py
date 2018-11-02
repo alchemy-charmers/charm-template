@@ -106,3 +106,7 @@ class ReactivePythonCharmTemplate(CharmTemplate):
         new_name = '%s.py' % config['metadata']['package'].replace('-', '_')
         os.rename(os.path.join(output_dir, 'src', 'lib', 'lib.py'),
                   os.path.join(output_dir, 'src', 'lib', 'lib_' + new_name.lower()))
+
+    def skip_template(self, filename):
+        return (filename.startswith('.') or filename in ('Makefile', ) or
+                filename.endswith('.pyc'))
