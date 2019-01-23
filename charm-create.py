@@ -1,9 +1,15 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 
 import inspect
 import importlib
 import os
 import pkg_resources
+import sys
+import glob
+
+for dirs in glob.glob('/snap/charm/current/lib/python3*/site-packages'):
+    if os.path.isdir(dirs):
+        sys.path.append(dirs)
 
 from charmtools import create
 from charmtools.generators import CharmGenerator

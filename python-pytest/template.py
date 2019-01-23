@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 
 #    Copyright (C) 2014  Canonical Ltd.
 #
@@ -66,7 +66,7 @@ class ReactivePythonCharmTemplate(CharmTemplate):
         o = tempfile.NamedTemporaryFile(
             dir=path.dirname(outfile), delete=False)
         os.chmod(o.name, mode)
-        o.write(str(t))
+        o.write(str(t).encode())
         o.close()
         backupname = outfile + str(time.time())
         os.rename(outfile, backupname)
