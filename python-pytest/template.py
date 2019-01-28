@@ -40,7 +40,7 @@ class ReactivePythonCharmTemplate(CharmTemplate):
     # we don't want transferred over to the charm template:
     _EXTRA_FILES = ["README.md", ".git", ".gitmodules"]
 
-    _TEMPLATE_URL = "https://git.launchpad.net/template-python-pytest"
+    _TEMPLATE_URL = "https://github.com/chris-sanders/template-python-pytest.git"
 
     def create_charm(self, config, output_dir):
         config['metadata']['package'] = config['metadata']['package'].lower()
