@@ -99,13 +99,13 @@ class ReactivePythonCharmTemplate(CharmTemplate):
 
         # rename handlers.py to <charm-name>.py
         new_name = '%s.py' % config['metadata']['package'].replace('-', '_')
-        os.rename(os.path.join(output_dir, 'src', 'reactive', 'handlers.py'),
-                  os.path.join(output_dir, 'src', 'reactive', new_name))
+        os.rename(os.path.join(output_dir, 'reactive', 'handlers.py'),
+                  os.path.join(output_dir, 'reactive', new_name))
 
         # rename lib.py to <charm-name>.py
         new_name = '%s.py' % config['metadata']['package'].replace('-', '_')
-        os.rename(os.path.join(output_dir, 'src', 'lib', 'lib.py'),
-                  os.path.join(output_dir, 'src', 'lib', 'lib_' + new_name.lower()))
+        os.rename(os.path.join(output_dir, 'lib', 'lib.py'),
+                  os.path.join(output_dir, 'lib', 'lib_' + new_name.lower()))
 
     def skip_template(self, filename):
         return (filename.startswith('.') or filename in ('Makefile', ) or
