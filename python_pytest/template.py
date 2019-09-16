@@ -33,7 +33,7 @@ from charmtools.generators import (
 log = logging.getLogger(__name__)
 
 
-class ReactivePythonCharmTemplate(CharmTemplate):
+class PytestPythonCharmTemplate(CharmTemplate):
     """Creates a reactive, layered python-based charm"""
 
     # _EXTRA_FILES is the list of names of files present in the git repo

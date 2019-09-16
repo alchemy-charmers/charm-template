@@ -37,14 +37,14 @@ for template in templates:
         if inspect.isclass(obj):
             class_name = name
             break
-    distribution = pkg_resources.Distribution(template_path)
-    entry_point = pkg_resources.EntryPoint.parse('{} = {}:{}'.format(template,
-                                                                     'template',
-                                                                     class_name),
-                                                 dist=distribution)
+    distribution = pkg_resources.Distribution(template_path, None, template)
+    entry_point = pkg_resources.EntryPoint(name=template,
+                                           module_name=template,
+                                           attrs=(class_name, ),
+                                           dist=distribution,
+                                           )
     distribution._ep_map = {'charmtools.templates': {template: entry_point}}
     pkg_resources.working_set.add(distribution)
-
 
 # Home should mean home
 def _get_output_path(self):
