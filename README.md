@@ -22,5 +22,5 @@ You can now run the incldued charm-template tool to create templates with the
 new template python-pytest.
 ```bash
 cd charm-template
-./charm-create.py -t python-pytest my-example
+./charm-create.py -t python_pytest my-example
 ```
