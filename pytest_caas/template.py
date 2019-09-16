@@ -33,14 +33,14 @@ from charmtools.generators import (
 log = logging.getLogger(__name__)
 
 
-class ReactivePythonCharmTemplate(CharmTemplate):
+class CaasPythonCharmTemplate(CharmTemplate):
     """Creates a reactive, layered python-based charm"""
 
     # _EXTRA_FILES is the list of names of files present in the git repo
     # we don't want transferred over to the charm template:
     _EXTRA_FILES = ["README.md", ".git", ".gitmodules"]
 
-    _TEMPLATE_URL = "https://github.com/chris-sanders/template-python-pytest.git"
+    _TEMPLATE_URL = "https://github.com/pirate-charmers/template-pytest-caas.git"
 
     def create_charm(self, config, output_dir):
         config['metadata']['package'] = config['metadata']['package'].lower()
@@ -50,7 +50,8 @@ class ReactivePythonCharmTemplate(CharmTemplate):
             for outfile in files:
                 if self.skip_template(outfile):
                     continue
-
+                if root.endswith('templates/'):
+                    continue  # Don't process template files included in the charm
                 self._template_file(config, path.join(root, outfile))
 
     def _template_file(self, config, outfile):
@@ -61,6 +62,7 @@ class ReactivePythonCharmTemplate(CharmTemplate):
         config['libfile'] = 'lib_{}'.format(config['metadata']['package'].replace('-', '_')).lower()
         config['libclass'] = '{}Helper'.format(config['metadata']['package'].replace('-', '').capitalize())
         config['fixture'] = config['metadata']['package'].replace('-', '').lower()
+        config['safe_package'] = config['metadata']['package'].replace('-', '_').lower()
         mode = os.stat(outfile)[ST_MODE]
         t = Template(file=outfile, searchList=(config))
         o = tempfile.NamedTemporaryFile(
