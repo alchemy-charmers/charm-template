@@ -37,7 +37,7 @@ class OperatorPythonCharmTemplate(CharmTemplate):
     """Create an operator charm."""
 
     _REMOVE_FILES = [".git", ".gitmodules"]
-    _TEMPLATE_URL = "https://github.com/devec0/template-python-operator.git"
+    _TEMPLATE_URL = "https://github.com/alchemy-charmers/template-python-operator.git"
 
     def prompts(self):
         """Implement prompts for user input."""
