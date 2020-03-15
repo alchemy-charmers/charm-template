@@ -74,7 +74,7 @@ class OperatorPythonCharmTemplate(CharmTemplate):
                 self._template_file(config, path.join(root, outfile))
 
         self._add_submodule(output_dir)
-        self._git_commit(output_dir)
+        self._git_commit(output_dir, msg="Initial commit by charm-template using python operator template.")
 
     def _template_file(self, config, outfile):
         if path.islink(outfile):
