@@ -37,7 +37,7 @@ class OperatorPythonCharmTemplate(CharmTemplate):
     """Create an operator charm."""
 
     _REMOVE_FILES = [".git", ".gitmodules"]
-    _TEMPLATE_URL = "https://github.com/devec0/template-python-operator.git"
+    _TEMPLATE_URL = "https://github.com/alchemy-charmers/template-python-operator.git"
 
     def prompts(self):
         """Implement prompts for user input."""
@@ -74,6 +74,7 @@ class OperatorPythonCharmTemplate(CharmTemplate):
                 self._template_file(config, path.join(root, outfile))
 
         self._add_submodule(output_dir)
+        self._git_commit(output_dir, msg="Initial commit by charm-template using python operator template.")
 
     def _template_file(self, config, outfile):
         if path.islink(outfile):
@@ -144,6 +145,33 @@ class OperatorPythonCharmTemplate(CharmTemplate):
             raise Exception(
                 "The below error was encountered when attempting to add"
                 "the Operator framework as a submodule:\n{}".format(str(e))
+            )
+
+    def _git_commit(self, output_dir, msg="Initial commit"):
+        """Commit the git repository."""
+        cmd = "git -C {} add .".format(
+            output_dir,
+        )
+
+        try:
+            subprocess.check_call(cmd.split())
+        except OSError as e:
+            raise Exception(
+                "The below error has occurred whilst attempting to add files"
+                "to the git repository for the new charm:\n{}".format(str(e))
+            )
+
+        cmd = "git -C {} commit -am {}".format(
+            output_dir,
+            msg,
+        )
+
+        try:
+            subprocess.check_call(cmd.split(maxsplit=5))
+        except OSError as e:
+            raise Exception(
+                "The below error has occurred whilst attempting to commit"
+                "to the git repository for the new charm:\n{}".format(str(e))
             )
 
     def skip_template(self, filename):
